@@ -1,16 +1,46 @@
-Workshop 1
-1. Thai Tokenization Strategy
-การใช้ LEGAL_COMPOUNDS ร่วมกับ Placeholder ในงานเฉพาะทาง 
-(Domain-specific)เพราะ Tokenizer ทั่วไปมักจะตัดคำว่า "สิทธิบัตรการประดิษฐ์" 
-แยกออกจากกัน ซึ่งในทางกฎหมาย ความหมายจะเปลี่ยนหรือลดทอนความสำคัญลงทันที
-2. Legal Entity Extraction (NER Lite)
-การใช้ Regex ในส่วนของ PATTERNS ครอบคลุมเลขไทย (๐-๙) 
-และรูปแบบโทษ (จำคุก/ปรับ) ได้ดีมากครับ จุดนี้คือหัวใจสำคัญของ Computational Law 
-เพราะเป็นการแปลง "ภาษามนุษย์" ให้กลายเป็น "ข้อมูลโครงสร้าง" 
-(Structured Data) ที่ Machine สามารถนำไปคำนวณต่อในชั้น 
-LQM (Large Quantitative Models) ได้
-3. Word Embeddings (Co-occurrence Matrix)
-การสร้าง Co-occurrence Matrix ด้วย window_size 
-เป็นการปูพื้นฐานให้เห็นภาพว่า "คำที่อยู่ใกล้กันมักมีความหมายเกี่ยวข้องกัน" 
-เช่น เมื่อเห็นคำว่า "ละเมิด" มักจะพบคำว่า "จำคุก" หรือ "ปรับ" 
-ในระยะที่กำหนด ซึ่งเป็น Concept เดียวกับที่ Word2Vec หรือ Transformer ใช้ในสเกลที่ใหญ่กว่า
+=============================================================================
+RESEARCH NOTE: WORKSHOP 1 (Thai Legal NLP Baseline)
+Project: Physics-Governed IoT Framework for IP Law
+Date: 2026-03-25
+Author: น.ท. ตั้ม
+=============================================================================
+
+[OVERVIEW]
+Workshop 1 มุ่งเน้นการสร้าง "Modular Data Pipeline" เพื่อเปลี่ยนข้อมูลกฎหมายดิบ 
+(Raw Thai IP Law Text) ให้กลายเป็น Structured Data ที่พร้อมสำหรับงาน Deep Learning 
+ในลำดับถัดไป (W2-W4)
+
+[KEY COMPONENTS & LOGIC]
+
+1. DATA ARCHITECTURE (Modular Pipeline)
+   - แยกส่วน Raw Data (.txt) ออกจาก Processing Logic (.py)
+   - ใช้ JSON เป็นตัวกลาง (Intermediate Representation) เพื่อจัดเก็บ Metadata 
+     เช่น เลขมาตรา, ประเภทกฎหมาย และเนื้อหาแยกส่วนกัน
+   - ข้อดี: ทำให้ Dataset ขยายตัวได้ง่าย (Scalable) โดยไม่ต้องแก้ไข Code หลัก
+
+2. THAI LEGAL TOKENIZER (Rule-based Approach)
+   - ปัญหา: Tokenizer ทั่วไปมักตัดคำศัพท์กฎหมายเฉพาะทางผิดพลาด
+   - แนวทางแก้ไข: ใช้ "Legal Compounds Protection" โดยการกำหนดคำสำคัญ 
+     (เช่น 'สิทธิบัตรการประดิษฐ์', 'การละเมิดสิทธิ') และใช้ Placeholder 
+     ป้องกันการถูกตัดแยกส่วนก่อนเริ่มกระบวนการ Tokenize ปกติ
+   - ผลลัพธ์: รักษาความหมายเชิงบริบทของตัวบทกฎหมายได้แม่นยำกว่า
+
+3. LEGAL ENTITY EXTRACTION (Regex-based)
+   - พัฒนา Patterns เพื่อสกัด Entities สำคัญ:
+     * STATUTE: เลขมาตรา และ พ.ร.บ.
+     * PENALTY: บทลงโทษ (จำคุก/ปรับ) เพื่อใช้คำนวณ Severity ในอนาคต
+     * ACTION: พฤติการณ์ที่เข้าข่ายการละเมิด
+
+4. FEATURE REPRESENTATION
+   - TF-IDF: ใช้ระบุ "Weight" ของคำในแต่ละมาตรา เพื่อหาจุดเด่นของแต่ละหมวดกฎหมาย
+   - Co-occurrence Matrix: สร้างความสัมพันธ์เบื้องต้นระหว่างคำ (Contextual Linkage) 
+     ก่อนจะอัปเกรดเป็น BERT Embeddings
+
+[INTEGRATION POINT]
+ผลลัพธ์จาก W1 จะถูกส่งต่อให้ Workshop 2 (LSTM) เพื่อทำ Text Classification 
+และจะเป็น Input สำคัญให้กับ Physics Gate ในส่วนของ W17 (PINNs Integration)
+
+-----------------------------------------------------------------------------
+Status: [COMPLETED]
+Next Step: Workshop 3 (Transformer & Self-Attention)
+-----------------------------------------------------------------------------
