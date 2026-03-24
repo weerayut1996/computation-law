@@ -1,0 +1,16 @@
+Workshop 1
+1. Thai Tokenization Strategy
+การใช้ LEGAL_COMPOUNDS ร่วมกับ Placeholder ในงานเฉพาะทาง 
+(Domain-specific)เพราะ Tokenizer ทั่วไปมักจะตัดคำว่า "สิทธิบัตรการประดิษฐ์" 
+แยกออกจากกัน ซึ่งในทางกฎหมาย ความหมายจะเปลี่ยนหรือลดทอนความสำคัญลงทันที
+2. Legal Entity Extraction (NER Lite)
+การใช้ Regex ในส่วนของ PATTERNS ครอบคลุมเลขไทย (๐-๙) 
+และรูปแบบโทษ (จำคุก/ปรับ) ได้ดีมากครับ จุดนี้คือหัวใจสำคัญของ Computational Law 
+เพราะเป็นการแปลง "ภาษามนุษย์" ให้กลายเป็น "ข้อมูลโครงสร้าง" 
+(Structured Data) ที่ Machine สามารถนำไปคำนวณต่อในชั้น 
+LQM (Large Quantitative Models) ได้
+3. Word Embeddings (Co-occurrence Matrix)
+การสร้าง Co-occurrence Matrix ด้วย window_size 
+เป็นการปูพื้นฐานให้เห็นภาพว่า "คำที่อยู่ใกล้กันมักมีความหมายเกี่ยวข้องกัน" 
+เช่น เมื่อเห็นคำว่า "ละเมิด" มักจะพบคำว่า "จำคุก" หรือ "ปรับ" 
+ในระยะที่กำหนด ซึ่งเป็น Concept เดียวกับที่ Word2Vec หรือ Transformer ใช้ในสเกลที่ใหญ่กว่า
