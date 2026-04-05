@@ -520,39 +520,39 @@ def print_section(title: str, char: str = "="):
     print(f"{char*width}")
 
 
-def run_workshop():
-
-    print("█"*62)
+def run_workshop():  # การทำงานหลักของ workshop นี้ เริ่มที่นี่ครับ
+    print("=" * 62)
     print("  WORKSHOP 1: Thai Legal Text Processing for IP Law")
-    print("  น.ท. ตั้ม | Physics-Governed IoT Framework | 2026")
-    print("█"*62)
+    print("  Wng. Cdr. Weerayut Khrangklang | Physics-Governed IoT | 2026")
+    print("=" * 62)
 
-    # ──────────────────────────────────────────────────────────
-    # STEP 1: Tokenization
-    # ──────────────────────────────────────────────────────────
-    print_section("STEP 1: Thai Legal Tokenization")
 
-    tokenizer = ThaiLegalTokenizer()
+# ──────────────────────────────────────────────────────────
+# STEP 1: Tokenization
+# ──────────────────────────────────────────────────────────
+print_section("STEP 1: Thai Legal Tokenization")
 
-    sample_text = THAI_IP_CORPUS[1]  # มาตรา 36 สิทธิบัตร
-    print(f"\nInput Text:\n{sample_text[:80]}...")
+tokenizer = ThaiLegalTokenizer()
 
-    tokens = tokenizer.tokenize(sample_text, remove_stopwords=False)
-    tokens_no_stop = tokenizer.tokenize(sample_text, remove_stopwords=True)
+sample_text = THAI_IP_CORPUS[1]  # มาตรา 36 สิทธิบัตร
+print(f"\nInput Text:\n{sample_text[:80]}...")
 
-    print(f"\nAll tokens ({len(tokens)}):")
-    print("  " + " | ".join(tokens[:15]) + " ...")
-    print(f"\nTokens (stopwords removed) ({len(tokens_no_stop)}):")
-    print("  " + " | ".join(tokens_no_stop[:15]) + " ...")
+tokens = tokenizer.tokenize(sample_text, remove_stopwords=False)
+tokens_no_stop = tokenizer.tokenize(sample_text, remove_stopwords=True)
 
-    # ──────────────────────────────────────────────────────────
-    # STEP 2: Legal Entity Extraction
-    # ──────────────────────────────────────────────────────────
-    print_section("STEP 2: Legal Entity Extraction")
+print(f"\nAll tokens ({len(tokens)}):")
+print("  " + " | ".join(tokens[:15]) + " ...")
+print(f"\nTokens (stopwords removed) ({len(tokens_no_stop)}):")
+print("  " + " | ".join(tokens_no_stop[:15]) + " ...")
 
-    extractor = ThaiIPEntityExtractor()
+ # ──────────────────────────────────────────────────────────
+ # STEP 2: Legal Entity Extraction
+ # ──────────────────────────────────────────────────────────
+ print_section("STEP 2: Legal Entity Extraction")
 
-    for i, doc in enumerate(THAI_IP_CORPUS[:4]):
+  extractor = ThaiIPEntityExtractor()
+
+   for i, doc in enumerate(THAI_IP_CORPUS[:4]):
         entities = extractor.extract(doc)
         if entities:
             print(f"\nDoc {i+1}: {doc[:45]}...")
