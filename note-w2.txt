@@ -1,3 +1,11 @@
+=============================================================================
+RESEARCH NOTE: WORKSHOP 1 (Thai Legal NLP Baseline)
+Project: Physics-Governed IoT Framework for IP Law Enforcement
+Date: 2026-04-05
+Author: Wng. Cdr. Weerayut Khrangklang
+Affiliation: Directorate of Joint Communication, RTARF
+=============================================================================
+Workshop 2
 1. การจัดการ Class Imbalance ด้วย SMOTE
 ในโลกกฎหมายจริง ข้อพิพาทหรือการละเมิดสิทธิบัตร (Infringement) มักจะมีข้อมูลน้อยกว่ากรณีปกติ (Non-infringement) เสมอ
 ทฤษฎี: SMOTE (Synthetic Minority Over-sampling Technique) ไม่ใช่วิธีการ "ก๊อปปี้" ข้อมูลเดิม แต่เป็นการ "สร้างข้อมูลใหม่" โดยใช้หลักการทางเรขาคณิต (Interpolation) ระหว่างจุดข้อมูลที่อยู่ใกล้กัน (K-Nearest Neighbors)
